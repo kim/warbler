@@ -55,6 +55,7 @@ module Warbler
       define_app_task
       define_jar_task
       define_debug_task
+      define_jetty_run_task
     end
 
     def define_main_task
@@ -290,6 +291,13 @@ module Warbler
         spec.dependencies.each do |dep|
           define_single_gem_tasks(dep.name, targets, dep.version_requirements)
         end
+      end
+    end
+    
+    def define_jetty_run_task
+      desc "Run the app using an embedded jetty server"
+      task "jetty_run" do
+        JettyLauncher.launch
       end
     end
 
